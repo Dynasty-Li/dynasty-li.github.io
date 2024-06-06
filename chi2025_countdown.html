@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHI2025 Countdown</title>
+    <title>Countdowns to Important Deadlines</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -20,7 +20,10 @@
             margin-bottom: 20px;
             color: #333;
         }
-        #countdown {
+        .countdown-section {
+            margin-bottom: 40px;
+        }
+        .countdown-container {
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -31,6 +34,7 @@
             border-radius: 10px;
             padding: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         .countdown-item span {
             display: block;
@@ -40,57 +44,82 @@
     </style>
 </head>
 <body>
-    <h1>Countdown to CHI 2025 Paper Submission Deadline</h1>
-    <div id="countdown">
-        <div class="countdown-item">
-            <div id="days"></div>
-            <span>Days</span>
+    <h1>Countdowns to Important Deadlines</h1>
+    
+    <div class="countdown-section">
+        <h2>CHI 2025 Paper Submission Deadline</h2>
+        <div id="chi-countdown" class="countdown-container">
+            <div class="countdown-item">
+                <div id="chi-days"></div>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <div id="chi-hours"></div>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <div id="chi-minutes"></div>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <div id="chi-seconds"></div>
+                <span>Seconds</span>
+            </div>
         </div>
-        <div class="countdown-item">
-            <div id="hours"></div>
-            <span>Hours</span>
-        </div>
-        <div class="countdown-item">
-            <div id="minutes"></div>
-            <span>Minutes</span>
-        </div>
-        <div class="countdown-item">
-            <div id="seconds"></div>
-            <span>Seconds</span>
+    </div>
+    
+    <div class="countdown-section">
+        <h2>IEEE VR 2025 Paper Submission Deadline</h2>
+        <div id="ieee-countdown" class="countdown-container">
+            <div class="countdown-item">
+                <div id="ieee-days"></div>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <div id="ieee-hours"></div>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <div id="ieee-minutes"></div>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <div id="ieee-seconds"></div>
+                <span>Seconds</span>
+            </div>
         </div>
     </div>
 
     <script>
-        // Set the date we're counting down to
-        var countDownDate = new Date("Sep 12, 2024 23:59:59").getTime();
+        function startCountdown(targetDate, elementIds) {
+            var countDownDate = new Date(targetDate).getTime();
 
-        // Update the count down every 1 second
-        var x = setInterval(function() {
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
 
-            // Get today's date and time
-            var now = new Date().getTime();
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
+                document.getElementById(elementIds.days).innerHTML = days;
+                document.getElementById(elementIds.hours).innerHTML = hours;
+                document.getElementById(elementIds.minutes).innerHTML = minutes;
+                document.getElementById(elementIds.seconds).innerHTML = seconds;
 
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById(elementIds.days).innerHTML = "0";
+                    document.getElementById(elementIds.hours).innerHTML = "0";
+                    document.getElementById(elementIds.minutes).innerHTML = "0";
+                    document.getElementById(elementIds.seconds).innerHTML = "0";
+                }
+            }, 1000);
+        }
 
-            // Display the result in the element with id
-            document.getElementById("days").innerHTML = days;
-            document.getElementById("hours").innerHTML = hours;
-            document.getElementById("minutes").innerHTML = minutes;
-            document.getElementById("seconds").innerHTML = seconds;
-
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-            }
-        }, 1000);
+        startCountdown("2024-09-12T23:59:59Z", {days: "chi-days", hours: "chi-hours", minutes: "chi-minutes", seconds: "chi-seconds"});
+        startCountdown("2024-09-25T23:59:59Z", {days: "ieee-days", hours: "ieee-hours", minutes: "ieee-minutes", seconds: "ieee-seconds"});
     </script>
 </body>
 </html>
