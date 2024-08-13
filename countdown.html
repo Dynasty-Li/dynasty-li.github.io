@@ -13,39 +13,94 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
         }
         h1 {
             font-size: 3em;
+            margin-bottom: 30px;
+            color: #00c6ff;
+            text-shadow: 0 0 20px rgba(0, 198, 255, 0.7);
+        }
+        h2 {
+            font-size: 1.5em;
             margin-bottom: 20px;
-            color: #333;
+            color: #66fcf1;
+            text-shadow: 0 0 15px rgba(102, 252, 241, 0.7);
         }
         .countdown-section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            width: 80%;
         }
         .countdown-container {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 2em;
+            justify-content: space-around;
+            gap: 20px;
+            font-size: 1.5em;
         }
         .countdown-item {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
             text-align: center;
+            width: 80px;
         }
         .countdown-item span {
             display: block;
             font-size: 0.5em;
-            color: #666;
+            color: #66fcf1;
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.7);
         }
     </style>
 </head>
 <body>
     <h1>Countdowns to Important Deadlines</h1>
     
+    <div class="countdown-section">
+        <h2>CHI 2025 Abstract Deadline</h2>
+        <div id="chi-abstract-countdown" class="countdown-container">
+            <div class="countdown-item">
+                <div id="chi-abstract-days"></div>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <div id="chi-abstract-hours"></div>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <div id="chi-abstract-minutes"></div>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <div id="chi-abstract-seconds"></div>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="countdown-section">
+        <h2>IEEE VR 2025 Abstract Deadline</h2>
+        <div id="ieee-abstract-countdown" class="countdown-container">
+            <div class="countdown-item">
+                <div id="ieee-abstract-days"></div>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <div id="ieee-abstract-hours"></div>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <div id="ieee-abstract-minutes"></div>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <div id="ieee-abstract-seconds"></div>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+
     <div class="countdown-section">
         <h2>CHI 2025 Paper Submission Deadline</h2>
         <div id="chi-countdown" class="countdown-container">
@@ -118,10 +173,15 @@
             }, 1000);
         }
 
-// CHI 2025 deadline in AOE (UTC-12)
-startCountdown("2024-09-13T11:59:59Z", {days: "chi-days", hours: "chi-hours", minutes: "chi-minutes", seconds: "chi-seconds"});
-// IEEE VR 2025 deadline in AOE (UTC-12)
-startCountdown("2024-09-18T11:59:59Z", {days: "ieee-days", hours: "ieee-hours", minutes: "ieee-minutes", seconds: "ieee-seconds"});
+        // CHI 2025 Abstract deadline
+        startCountdown("2024-09-06T11:59:59Z", {days: "chi-abstract-days", hours: "chi-abstract-hours", minutes: "chi-abstract-minutes", seconds: "chi-abstract-seconds"});
+        // IEEE VR 2025 Abstract deadline
+        startCountdown("2024-09-12T11:59:59Z", {days: "ieee-abstract-days", hours: "ieee-abstract-hours", minutes: "ieee-abstract-minutes", seconds: "ieee-abstract-seconds"});
+        // CHI 2025 Paper Submission deadline
+        startCountdown("2024-09-13T11:59:59Z", {days: "chi-days", hours: "chi-hours", minutes: "chi-minutes", seconds: "chi-seconds"});
+        // IEEE VR 2025 Paper Submission deadline
+        startCountdown("2024-09-18T11:59:59Z", {days: "ieee-days", hours: "ieee-hours", minutes: "ieee-minutes", seconds: "ieee-seconds"});
     </script>
+
 </body>
 </html>
