@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdowns to Important Deadlines</title>
+    <title>Conference Deadline Countdowns</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,175 +13,88 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: #1e1e2f;
             color: #fff;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 2.2em;
             margin-bottom: 20px;
-            color: #00c6ff;
-            text-shadow: 0 0 20px rgba(0, 198, 255, 0.7);
-        }
-        h2 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #66fcf1;
-            text-shadow: 0 0 15px rgba(102, 252, 241, 0.7);
+            color: #ffcc00;
         }
         .countdown-section {
-            margin-bottom: 30px;
-            width: 100%;
-            max-width: 600px;
-        }
-        .countdown-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            font-size: 1.2em;
-        }
-        .countdown-item {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            margin: 10px;
+            width: 100%;
+            max-width: 500px;
             text-align: center;
-            flex-grow: 1;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
         }
-        .countdown-item span {
-            display: block;
-            font-size: 0.7em;
-            color: #66fcf1;
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.7);
+        .countdown-timer {
+            display: flex;
+            justify-content: space-around;
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 60px;
         }
     </style>
 </head>
 <body>
-    <h1>Countdowns to Important Deadlines</h1>
+    <h1>Conference Deadline Countdowns</h1>
     
     <div class="countdown-section">
-        <h2>CHI 2025 Abstract Deadline</h2>
-        <div id="chi-abstract-countdown" class="countdown-container">
-            <div class="countdown-item">
-                <div id="chi-abstract-days"></div>
-                <span>Days</span>
-            </div>
-            <div class="countdown-item">
-                <div id="chi-abstract-hours"></div>
-                <span>Hours</span>
-            </div>
-            <div class="countdown-item">
-                <div id="chi-abstract-minutes"></div>
-                <span>Minutes</span>
-            </div>
-            <div class="countdown-item">
-                <div id="chi-abstract-seconds"></div>
-                <span>Seconds</span>
-            </div>
-        </div>
+        <h2>ISS 2025 Paper Submission</h2>
+        <div id="iss-countdown" class="countdown-timer"></div>
     </div>
     
     <div class="countdown-section">
-        <h2>IEEE VR 2025 Abstract Deadline</h2>
-        <div id="ieee-abstract-countdown" class="countdown-container">
-            <div class="countdown-item">
-                <div id="ieee-abstract-days"></div>
-                <span>Days</span>
-            </div>
-            <div class="countdown-item">
-                <div id="ieee-abstract-hours"></div>
-                <span>Hours</span>
-            </div>
-            <div class="countdown-item">
-                <div id="ieee-abstract-minutes"></div>
-                <span>Minutes</span>
-            </div>
-            <div class="countdown-item">
-                <div id="ieee-abstract-seconds"></div>
-                <span>Seconds</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="countdown-section">
-        <h2>CHI 2025 Paper Submission Deadline</h2>
-        <div id="chi-countdown" class="countdown-container">
-            <div class="countdown-item">
-                <div id="chi-days"></div>
-                <span>Days</span>
-            </div>
-            <div class="countdown-item">
-                <div id="chi-hours"></div>
-                <span>Hours</span>
-            </div>
-            <div class="countdown-item">
-                <div id="chi-minutes"></div>
-                <span>Minutes</span>
-            </div>
-            <div class="countdown-item">
-                <div id="chi-seconds"></div>
-                <span>Seconds</span>
-            </div>
-        </div>
+        <h2>UIST 2025 Paper Submission</h2>
+        <div id="uist-countdown" class="countdown-timer"></div>
     </div>
     
     <div class="countdown-section">
-        <h2>IEEE VR 2025 Paper Submission Deadline</h2>
-        <div id="ieee-countdown" class="countdown-container">
-            <div class="countdown-item">
-                <div id="ieee-days"></div>
-                <span>Days</span>
-            </div>
-            <div class="countdown-item">
-                <div id="ieee-hours"></div>
-                <span>Hours</span>
-            </div>
-            <div class="countdown-item">
-                <div id="ieee-minutes"></div>
-                <span>Minutes</span>
-            </div>
-            <div class="countdown-item">
-                <div id="ieee-seconds"></div>
-                <span>Seconds</span>
-            </div>
-        </div>
+        <h2>ISMAR 2025 Paper Submission</h2>
+        <div id="ismar-countdown" class="countdown-timer"></div>
     </div>
-
+    
+    <div class="countdown-section">
+        <h2>MM 2025 Paper Submission</h2>
+        <div id="mm-countdown" class="countdown-timer"></div>
+    </div>
+    
     <script>
-        function startCountdown(targetDate, elementIds) {
+        function startCountdown(targetDate, elementId) {
             var countDownDate = new Date(targetDate).getTime();
-
-            var x = setInterval(function() {
+            var element = document.getElementById(elementId);
+            
+            setInterval(function() {
                 var now = new Date().getTime();
                 var distance = countDownDate - now;
-
+                
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById(elementIds.days).innerHTML = days;
-                document.getElementById(elementIds.hours).innerHTML = hours;
-                document.getElementById(elementIds.minutes).innerHTML = minutes;
-                document.getElementById(elementIds.seconds).innerHTML = seconds;
-
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById(elementIds.days).innerHTML = "0";
-                    document.getElementById(elementIds.hours).innerHTML = "0";
-                    document.getElementById(elementIds.minutes).innerHTML = "0";
-                    document.getElementById(elementIds.seconds).innerHTML = "0";
-                }
+                
+                element.innerHTML = `
+                    <div class="time-unit">${days} <br> Days</div>
+                    <div class="time-unit">${hours} <br> Hours</div>
+                    <div class="time-unit">${minutes} <br> Minutes</div>
+                    <div class="time-unit">${seconds} <br> Seconds</div>
+                `;
             }, 1000);
         }
-
-        // CHI 2025 Abstract deadline
-        startCountdown("2024-09-06T11:59:59Z", {days: "chi-abstract-days", hours: "chi-abstract-hours", minutes: "chi-abstract-minutes", seconds: "chi-abstract-seconds"});
-        // IEEE VR 2025 Abstract deadline
-        startCountdown("2024-09-12T11:59:59Z", {days: "ieee-abstract-days", hours: "ieee-abstract-hours", minutes: "ieee-abstract-minutes", seconds: "ieee-abstract-seconds"});
-        // CHI 2025 Paper Submission deadline
-        startCountdown("2024-09-13T11:59:59Z", {days: "chi-days", hours: "chi-hours", minutes: "chi-minutes", seconds: "chi-seconds"});
-        // IEEE VR 2025 Paper Submission deadline
-        startCountdown("2024-09-18T11:59:59Z", {days: "ieee-days", hours: "ieee-hours", minutes: "ieee-minutes", seconds: "ieee-seconds"});
+        
+        startCountdown("2025-03-14T23:59:59-12:00", "iss-countdown");  // ISS AoE
+        startCountdown("2025-04-09T23:59:59-12:00", "uist-countdown");  // UIST AoE
+        startCountdown("2025-04-11T23:59:59-12:00", "ismar-countdown"); // ISMAR AoE
+        startCountdown("2025-04-11T23:59:59-12:00", "mm-countdown");   // MM AoE
     </script>
 </body>
 </html>
